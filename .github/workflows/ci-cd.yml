@@ -25,9 +25,13 @@ jobs:
       - name: Run tests
         run: pytest
 
-      - name: Run code quality checks
+      - name: Code quality
         run: flake8 app tests
 
+      - name: Dependency vulnerability scan
+        run: |
+          pip install pip-audit
+          pip-audit -r requirements.txt
 
   docker:
     needs: test
